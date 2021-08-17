@@ -1,10 +1,10 @@
 <template>
-  <div>recommend</div>
+    <div>recommend</div>
 </template>
 
 <script>
 export default {
-  name: "recommend"
+    name: 'recommend'
 };
 </script>
 

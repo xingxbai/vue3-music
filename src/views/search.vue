@@ -1,11 +1,27 @@
 <template>
-  <div>search</div>
+    <div v-loading="loading" class="search">search</div>
 </template>
 
 <script>
 export default {
-  name: "search"
+    name: 'search',
+    data() {
+        return {
+            loading: true
+        };
+    },
+    mounted() {
+        setTimeout(() => {
+            this.loading = false;
+        }, 2000);
+    }
 };
 </script>
 
-<style lang="sass" scoped></style>
+<style lang="scss">
+.search {
+    width: 200px;
+    height: 200px;
+    background: red;
+}
+</style>
