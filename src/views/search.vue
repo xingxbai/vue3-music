@@ -22,6 +22,5 @@ export default {
 .search {
     width: 200px;
     height: 200px;
-    background: red;
 }
 </style>

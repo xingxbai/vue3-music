@@ -1,13 +1,15 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import {
+  createRouter,
+  createWebHashHistory
+} from "vue-router";
 import Home from "../views/Home.vue";
 import Recommend from "@/views/recommend";
-import Singer from "@/views/singler";
+import Singer from "@/views/singer";
 import Search from "@/views/search";
 
 import TopList from "@/views/top-list";
 
-const routes = [
-  {
+const routes = [{
     path: "/",
     redirect: "/recommend"
   },

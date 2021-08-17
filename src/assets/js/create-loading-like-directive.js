@@ -30,6 +30,10 @@ function createLoadingLikeDirective(Comp) {
       if (!el[name]) {
         el[name] = {}
       }
+      const title = binding.arg
+      if (typeof title !== 'undefined') {
+        instance.setTitle(title)
+      }
       // loading.vue 组件挂载在当前元素上
       el.instance = instance
       if (binding.value) {
@@ -38,6 +42,10 @@ function createLoadingLikeDirective(Comp) {
     },
     updated(el, binding) {
       const value = binding.value
+      const title = binding.arg
+      if (typeof title !== 'undefined') {
+        el.instance.setTitle(title)
+      }
       if (binding.value !== binding.oldValue) {
         binding.value ? append(el) : remove(el)
       }
