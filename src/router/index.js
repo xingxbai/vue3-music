@@ -6,7 +6,7 @@ import Home from "../views/Home.vue";
 import Recommend from "@/views/recommend";
 import Singer from "@/views/singer";
 import Search from "@/views/search";
-
+import SingerDetail from '@/views/singer-detail'
 import TopList from "@/views/top-list";
 
 const routes = [{
@@ -21,7 +21,11 @@ const routes = [{
   {
     path: "/singer",
     name: "singer",
-    component: Singer
+    component: Singer,
+    children: [{
+      path: ':id',
+      component: SingerDetail
+    }]
   },
   {
     path: "/search",
