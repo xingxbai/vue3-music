@@ -1,7 +1,12 @@
-import { ref, watch, nextTick, computed } from "vue";
+import {
+  ref,
+  watch,
+  nextTick,
+  computed
+} from "vue";
 
 const TITLE_HEIGHT = 30;
-export default function(props) {
+export default function (props) {
   const scrollY = ref(0);
   const currentIndex = ref(0);
   const listHeights = ref([]);
@@ -13,9 +18,9 @@ export default function(props) {
   });
   const fixedStyle = computed(() => {
     const diff =
-      distance.value > 0 && distance.value < TITLE_HEIGHT
-        ? distance.value - TITLE_HEIGHT
-        : 0;
+      distance.value > 0 && distance.value < TITLE_HEIGHT ?
+      distance.value - TITLE_HEIGHT :
+      0;
     return {
       transform: `translate3d(0,${diff}px,0 )`
     };
@@ -31,6 +36,7 @@ export default function(props) {
   );
   // 监听滚动事件，去计算currentIndex
   watch(scrollY, newY => {
+    console.log("rd: newY", newY)
     const listHeightsVal = listHeights.value;
     for (let i = 0; i < listHeightsVal.length - 1; i++) {
       const heightTop = listHeightsVal[i];
@@ -53,8 +59,15 @@ export default function(props) {
       listHeightsVal.push(height);
     }
   }
+
   function onScroll(position) {
     scrollY.value = -position.y;
   }
-  return { onScroll, groupRef, fixedTitle, currentIndex, fixedStyle };
+  return {
+    onScroll,
+    groupRef,
+    fixedTitle,
+    currentIndex,
+    fixedStyle
+  };
 }
