@@ -9,22 +9,26 @@ import {
 function createLoadingLikeDirective(Comp) {
 
   function append(el) {
-    if (el.instance) {
+    const name = Comp.name
+    if (el[name].instance) {
       const style = getComputedStyle(el)
       if (['relative', 'fixed', 'absolute'].indexOf(style.position) === -1) {
         addClass(el, relativeCls)
       }
-      el.appendChild(el.instance.$el)
+      el.appendChild(el[name].instance.$el)
     }
   }
 
   function remove(el) {
-    if (el.instance) {
-      el.removeChild(el.instance.$el)
+    const name = Comp.name
+    console.log("rd: remove -> el", el, el.instance)
+    if (el[name].instance) {
+      el.removeChild(el[name].instance.$el)
     }
   }
   return {
     mounted(el, binding) {
+      console.log("rd: mounted -> binding", el, binding)
       const instance = createApp(Comp).mount(document.createElement('div'))
       const name = Comp.name
       if (!el[name]) {
@@ -35,16 +39,18 @@ function createLoadingLikeDirective(Comp) {
         instance.setTitle(title)
       }
       // loading.vue 组件挂载在当前元素上
-      el.instance = instance
+      el[name].instance = instance
       if (binding.value) {
         append(el)
       }
     },
     updated(el, binding) {
       const value = binding.value
+      const name = Comp.name
+      console.log("rd: updated -> value", value, el)
       const title = binding.arg
       if (typeof title !== 'undefined') {
-        el.instance.setTitle(title)
+        el[name].instance.setTitle(title)
       }
       if (binding.value !== binding.oldValue) {
         binding.value ? append(el) : remove(el)
