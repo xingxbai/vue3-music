@@ -17,17 +17,17 @@
             class="list"
             :style="scrollStyle"
             v-loading="loading"
-            v-no-result="noResult"
+            v-no-result:[noResultText]="noResult"
             :probe-type="3"
             @scroll="onScroll"
         >
-            <!-- <div class="song-list-wrapper">
+            <div class="song-list-wrapper">
                 <song-list
                     :songs="songs"
                     @select="selectItem"
                     :rank="rank"
                 ></song-list>
-            </div> -->
+            </div>
             <div style="height:300px"></div>
         </scroll>
     </div>
@@ -57,14 +57,17 @@ export default {
     },
     data() {
         return {
+            noResultText: '抱歉，没有找到可播放的歌曲',
             imageHeight: 0,
             scrollY: 0,
             maxTranslateY: 0,
-            noResult: true,
             rank: 1
         };
     },
     computed: {
+        noResult() {
+            return !this.loading && !this.songs.length;
+        },
         bgImageStyle() {},
         playBtnStyle() {},
         filterStyle() {}
