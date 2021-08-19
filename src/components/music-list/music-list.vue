@@ -1,6 +1,6 @@
 <template>
     <div class="music-list">
-        <div class="back" @click="goBack">
+        <!-- <div class="back" @click="goBack">
             <i class="icon-back"></i>
         </div>
         <h1 class="title">{{ title }}</h1>
@@ -12,23 +12,24 @@
                 </div>
             </div>
             <div class="filter" :style="filterStyle"></div>
-        </div>
-        <!-- <scroll
+        </div> -->
+        <scroll
             class="list"
             :style="scrollStyle"
             v-loading="loading"
-            v-no-result:[noResultText]="noResult"
+            v-no-result="noResult"
             :probe-type="3"
             @scroll="onScroll"
         >
-            <div class="song-list-wrapper">
+            <!-- <div class="song-list-wrapper">
                 <song-list
                     :songs="songs"
                     @select="selectItem"
                     :rank="rank"
                 ></song-list>
-            </div>
-        </scroll> -->
+            </div> -->
+            <div style="height:300px"></div>
+        </scroll>
     </div>
 </template>
 
@@ -41,7 +42,13 @@
 //     SINGER_KEY,
 //     getSingerDetail
 // );
+import scroll from '../scroll/scroll';
+import songList from '../song-list/song-list';
 export default {
+    components: {
+        scroll,
+        songList
+    },
     props: {
         songs: Array,
         title: String,
@@ -50,7 +57,11 @@ export default {
     },
     data() {
         return {
-            songs: []
+            imageHeight: 0,
+            scrollY: 0,
+            maxTranslateY: 0,
+            noResult: true,
+            rank: 1
         };
     },
     computed: {
@@ -61,7 +72,8 @@ export default {
     methods: {
         goBack() {},
         selectItem() {},
-        random() {}
+        random() {},
+        onScroll() {}
     }
 };
 </script>

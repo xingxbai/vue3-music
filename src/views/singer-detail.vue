@@ -19,29 +19,39 @@
 //     SINGER_KEY,
 //     getSingerDetail
 // );
-import MusicList from '../components/music-list/music-list';
+// import MusicList from '../components/music-list/music-list';
+// import { getSingerDetail } from '@/service/singer';
+
+import createDetailComponent from '@/assets/js/create-detail-component';
 import { getSingerDetail } from '@/service/singer';
-export default {
-    data() {
-        return {
-            songs: [],
-            title: '',
-            pic: '',
-            loading: true
-        };
-    },
-    components: {
-        MusicList
-    },
-    async mounted() {
-        const result = await getSingerDetail({
-            mid: '0025NhlN2yWrP4'
-        });
-        console.log('rd: mounted -> result', result);
-        this.songs = result.songs;
-        this.loading = false;
-    }
-};
+import { SINGER_KEY } from '@/assets/js/constant';
+
+export default createDetailComponent(
+    'singer-detail',
+    SINGER_KEY,
+    getSingerDetail
+);
+// export default {
+//     data() {
+//         return {
+//             songs: [],
+//             title: '',
+//             pic: '',
+//             loading: true
+//         };
+//     },
+//     components: {
+//         MusicList
+//     },
+//     async mounted() {
+//         const result = await getSingerDetail({
+//             mid: '0025NhlN2yWrP4'
+//         });
+//         console.log('rd: mounted -> result', result);
+//         this.songs = result.songs;
+//         this.loading = false;
+//     }
+// };
 </script>
 
 <style lang="scss" scoped>

@@ -12,6 +12,8 @@
 <script>
 import { getSingerList } from '../service/singer';
 import IndexList from '../components/index-list/index-list';
+import { SINGER_KEY } from '../assets/js/constant';
+import storage from 'good-storage';
 export default {
     name: 'singer',
     components: {
@@ -31,6 +33,8 @@ export default {
         selectSinger(singer) {
             const mid = singer.mid;
             this.selectedSinger = singer;
+            // 用户点击歌手以后，歌手信息写入session
+            storage.session.set(SINGER_KEY, singer);
             this.$router.push('/singer/' + mid);
         }
     }
