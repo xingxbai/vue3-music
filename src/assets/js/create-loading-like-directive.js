@@ -47,7 +47,6 @@ function createLoadingLikeDirective(Comp) {
     updated(el, binding) {
       const value = binding.value
       const name = Comp.name
-      console.log("rd: updated -> value", value, el)
       const title = binding.arg
       if (typeof title !== 'undefined') {
         el[name].instance.setTitle(title)
