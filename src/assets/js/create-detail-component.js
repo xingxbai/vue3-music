@@ -1,9 +1,7 @@
-import storage from 'good-storage'
-import {
-  processSongs
-} from '@/service/song'
-import MusicList from '../../components/music-list/music-list.vue'
-export default function (name, key, fetch) {
+import storage from "good-storage";
+import { processSongs } from "@/service/song";
+import MusicList from "../../components/music-list/music-list.vue";
+export default function(name, key, fetch) {
   return {
     name,
     components: {
@@ -17,43 +15,43 @@ export default function (name, key, fetch) {
       return {
         songs: [],
         loading: true
-      }
+      };
     },
     computed: {
       computedData() {
-        let ret = null
+        let ret = null;
         if (!this.data) {
           // 如果没有传入data，则读取缓存session
-          const cached = storage.session.get(key)
-          ret = cached
+          const cached = storage.session.get(key);
+          if (cached && cached.mid === this.$route.params.id) {
+            ret = cached;
+          }
         } else {
-          ret = this.data
+          ret = this.data;
         }
-        return ret
+        return ret;
       },
       title() {
-        if (!this.computedData) return ''
-        return this.computedData.name
+        if (!this.computedData) return "";
+        return this.computedData.name;
       },
       pic() {
-        if (!this.computedData) return ''
-        return this.computedData.pic
+        if (!this.computedData) return "";
+        return this.computedData.pic;
       }
     },
     async mounted() {
-      const data = this.computedData
+      const data = this.computedData;
       if (!data) {
-        const path = this.$route.matched[0].path
+        const path = this.$route.matched[0].path;
         this.$router.push({
           path
-        })
-        return
+        });
+        return;
       }
-      const result = await fetch(data)
-      this.songs = await processSongs(result.songs)
-      this.loading = false
+      const result = await fetch(data);
+      this.songs = await processSongs(result.songs);
+      this.loading = false;
     }
-  }
-
-
+  };
 }
