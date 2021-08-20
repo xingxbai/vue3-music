@@ -6,12 +6,12 @@
             :key="song.id"
             @click="selectItem(song, index)"
         >
-            <div class="rank" v-if="rank">
+            <!-- <div class="rank" v-if="rank">
                 <span :class="getRankCls(index)">{{ getRankText(index) }}</span>
-            </div>
+            </div> -->
             <div class="content">
                 <h2 class="name">{{ song.name }}</h2>
-                <p class="desc">{{ getDesc(song) }}</p>
+                <!-- <p class="desc">{{ getDesc(song) }}</p> -->
             </div>
         </li>
     </ul>
@@ -29,13 +29,20 @@ export default {
         },
         rank: Boolean
     },
-    emits: ['select'],
+    emits: ['selectss'],
+    data() {
+        return {
+            timer: null
+        };
+    },
     methods: {
         getDesc(song) {
             return `${song.singer}·${song.album}`;
         },
         selectItem(song, index) {
-            this.$emit('select', { song, index });
+            this.debounce(() => {
+                this.$emit('selectss', { song, index });
+            });
         },
         getRankCls(index) {
             if (index <= 2) {
@@ -47,6 +54,16 @@ export default {
         getRankText(index) {
             if (index > 2) {
                 return index + 1;
+            }
+        },
+        // 使用防抖，解决click触发两次问题
+        debounce(fn) {
+            if (!this.timer) {
+                this.timer = setTimeout(() => {
+                    fn();
+                    clearTimeout(this.timer);
+                    this.timer = null;
+                });
             }
         }
     }

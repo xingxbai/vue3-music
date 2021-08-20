@@ -7,7 +7,9 @@
     >
         <ul ref="groupRef">
             <li v-for="group in data" :key="group.title" class="group">
-                <div class="title">{{ group.title }}</div>
+                <div class="title">
+                    {{ group.title }}
+                </div>
                 <ul>
                     <li
                         v-for="singer in group.list"
@@ -21,6 +23,9 @@
                 </ul>
             </li>
         </ul>
+        <div class="fixed" :style="fixedStyle">
+            <div class="fixed-title">{{ fixedTitle }}</div>
+        </div>
         <ul
             class="shortcut"
             @touchstart.stop.prevent="onShortcutTouchStart"
@@ -37,9 +42,6 @@
                 {{ shortcut }}
             </li>
         </ul>
-        <div class="fixed" :style="fixedStyle">
-            <div class="fixed-title">{{ fixedTitle }}</div>
-        </div>
     </scroll>
 </template>
 
