@@ -17,3 +17,12 @@ export function swap(arr, i, j) {
   arr[i] = arr[j];
   arr[j] = tmp;
 }
+export function formatTime(interval) {
+  const minutes = Math.floor(interval / 60)
+    .toString()
+    .padStart(2, "0");
+  const seconds = Math.floor(interval % 60)
+    .toString()
+    .padStart(2, "0");
+  return `${minutes}:${seconds}`;
+}

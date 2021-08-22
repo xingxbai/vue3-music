@@ -23,7 +23,6 @@ export default function() {
     return isFavourite(song) ? "icon-favorite" : "icon-not-favorite";
   }
   function isFavourite(song) {
-    console.log(1111, favouriteList.value);
     const index = favouriteList.value.findIndex(item => {
       return item.id === song.id;
     });
