@@ -11,17 +11,28 @@
     ><button @click="showMessage">点击message</button>
     <confirm ref="confirmRef"></confirm>
     <message ref="messageRef"></message>
+    <switches
+        :items="['最近播放', '搜索历史']"
+        v-model="currentIndex"
+    ></switches>
 </template>
 <script>
 import Player from '@/components/player/player';
 import confirm from '@/components/base/confirm';
 import message from '@/components/base/message';
+import switches from '@/components/base/switches';
 import { mapState } from 'vuex';
 export default {
     components: {
         Player,
         confirm,
-        message
+        message,
+        switches
+    },
+    data() {
+        return {
+            currentIndex: 1
+        };
     },
     computed: {
         viewStyle() {
