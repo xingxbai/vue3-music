@@ -7,18 +7,21 @@
     </div>
     <router-view />
     <player :style="viewStyle"></player>
-    <button @click="showConfirm">点击</button>
+    <button @click="showConfirm">点击confirm</button
+    ><button @click="showMessage">点击message</button>
     <confirm ref="confirmRef"></confirm>
+    <message ref="messageRef"></message>
 </template>
 <script>
 import Player from '@/components/player/player';
 import confirm from '@/components/base/confirm';
+import message from '@/components/base/message';
 import { mapState } from 'vuex';
-
 export default {
     components: {
         Player,
-        confirm
+        confirm,
+        message
     },
     computed: {
         viewStyle() {
@@ -37,6 +40,10 @@ export default {
         showConfirm() {
             const confirmRef = this.$refs.confirmRef;
             confirmRef.show();
+        },
+        showMessage() {
+            const messageRef = this.$refs.messageRef;
+            messageRef.show();
         }
     }
 };
